@@ -1,9 +1,7 @@
 <?php
 session_start();
 
-include __DIR__ . '/functions.php';
-
-//var_dump($_SESSION["password"]);
+var_dump($_SESSION["password"]);
 
 ?>
 

@@ -9,7 +9,7 @@ Creare un form che invii in GET la lunghezza della password. Una nostra funzione
 ✅Milestone 2
 Verificato il corretto funzionamento del nostro codice, spostiamo la logica in un file functions.php che includeremo poi nella pagina principale
 
-✅Milestone 3 (BONUS)
+Milestone 3 (BONUS)
 Invece di visualizzare la password nella index, effettuare un redirect ad una pagina dedicata che tramite $_SESSION recupererà la password da mostrare all’utente.
 leggete le slide sulla session e la documentazione
 
@@ -17,16 +17,31 @@ Milestone 4 (BONUS)
 Gestire ulteriori parametri per la password: quali caratteri usare fra numeri, lettere e simboli. Possono essere scelti singolarmente (es. solo numeri) oppure possono essere combinati fra loro (es. numeri e simboli, oppure tutti e tre insieme). Dare all’utente anche la possibilità di permettere o meno la ripetizione di caratteri uguali. */
 
 
-var_dump($_GET['password_length']);
+
 
 //Can be 'on' or null
 /* $number = $_GET['number'];
 $letters = $_GET['letters'];
 $symbol = $_GET['symbol']; */
 
-$password_length = $_GET['password_length'];
+if (isset($_GET['password_length'])) {
+    $password_length = $_GET['password_length'];
 
-include __DIR__ . '/partials/functions.php'
+    session_start();
+
+    if ($password_length !== '') {
+
+        include __DIR__ . '/partials/functions.php';
+
+        $password = generate_password($password_length);
+
+        $_SESSION["password"] = $password;
+
+        var_dump($_SESSION["password"]);
+    };
+} else {
+    var_dump('no password_length');
+}
 
 ?>
 
@@ -46,7 +61,9 @@ include __DIR__ . '/partials/functions.php'
 
     <div class="container mt-4">
 
-        <form method="get" action="./partials/password.php" class="d-flex align-items-center justify-content-center gap-3">
+        <!-- ./partials/password.php -->
+        <!-- SE FACCIO IL REDIRECT VERSO PASSWORD.PHP RIESCO A VISUALIZZARE LA PASSWORD CORRETTA SOLO LA PRIMA VOLTA,SUCCESSIVAMENTE AD OGNI SUBMIT VISUALIZZO SEMPRE LA STESSA -->
+        <form method="get" action="" class="d-flex align-items-center justify-content-center gap-3">
             <label for="password_length" class="form-label">How long to be the password? Set number between 0 and 30</label>
             <input type="number" class="form-control" name="password_length" id="password_length" aria-describedby="helpId" placeholder="0" style="width: 70px;">
 
@@ -70,7 +87,7 @@ include __DIR__ . '/partials/functions.php'
     </div>
     <!-- /.container -->
 
-    <!-- <div class="container mt-4">
+    <div class="container mt-4">
 
         <?php if (isset($password) && $password !== null && $password !== '') : ?>
 
@@ -81,7 +98,7 @@ include __DIR__ . '/partials/functions.php'
         <?php endif ?>
 
     </div>
-     -->
+
 
 
 
