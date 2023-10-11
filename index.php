@@ -19,6 +19,11 @@ Gestire ulteriori parametri per la password: quali caratteri usare fra numeri, l
 
 var_dump($_GET['password_length']);
 
+//Can be 'on' or null
+/* $number = $_GET['number'];
+$letters = $_GET['letters'];
+$symbol = $_GET['symbol']; */
+
 $password_length = $_GET['password_length'];
 
 include __DIR__ . '/partials/functions.php'
@@ -40,9 +45,26 @@ include __DIR__ . '/partials/functions.php'
 <body>
 
     <div class="container mt-4">
+
         <form method="get" action="./partials/password.php" class="d-flex align-items-center justify-content-center gap-3">
             <label for="password_length" class="form-label">How long to be the password? Set number between 0 and 30</label>
             <input type="number" class="form-control" name="password_length" id="password_length" aria-describedby="helpId" placeholder="0" style="width: 70px;">
+
+            <div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="number" id="number">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Number</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="letters" id="letters">
+                    <label class="form-check-label" for="flexSwitchCheckChecked">Letters</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="symbol" id="symbol">
+                    <label class="form-check-label" for="flexSwitchCheckDisabled">Symbol</label>
+                </div>
+            </div>
+
             <button type="submit" class="btn btn-success">Generate</button>
         </form>
     </div>
