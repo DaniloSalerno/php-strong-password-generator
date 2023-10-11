@@ -6,7 +6,7 @@ Dobbiamo creare una pagina che permetta ai nostri utenti di utilizzare il nostro
 ✅Milestone 1
 Creare un form che invii in GET la lunghezza della password. Una nostra funzione utilizzerà questo dato per generare una password casuale (composta da lettere, lettere maiuscole, numeri e simboli) da restituire all’utente. Scriviamo tutto (logica e layout) in un unico file index.php
 
-Milestone 2
+✅Milestone 2
 Verificato il corretto funzionamento del nostro codice, spostiamo la logica in un file functions.php che includeremo poi nella pagina principale
 
 Milestone 3 (BONUS)
@@ -20,29 +20,7 @@ var_dump($_GET['password_length']);
 
 $password_length = $_GET['password_length'];
 
-if (isset($password_length) && $password_length !== '') {
-
-    $password = generate_password($password_length);
-};
-
-function generate_password($password_length)
-{
-    if ($password_length > 0 && $password_length < 30) {
-
-        $characters = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789.-_?!/+<>^][";
-
-        for ($i = 0; $i < $password_length; $i++) {
-
-            $char = rand(0, strlen($characters) - 1);
-
-            $new_password[$i] = $characters[$char];
-        }
-    }
-
-    return (implode('', $new_password));
-}
-
-
+include __DIR__ . '/partials/functions.php'
 
 ?>
 
