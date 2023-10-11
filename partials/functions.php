@@ -1,7 +1,13 @@
 <?php
+session_start();
+
 if (isset($password_length) && $password_length !== '') {
 
     $password = generate_password($password_length);
+
+    $_SESSION["password"] = $password;
+
+    //var_dump($_SESSION["password"]);
 };
 
 function generate_password($password_length)
