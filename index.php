@@ -9,7 +9,7 @@ Creare un form che invii in GET la lunghezza della password. Una nostra funzione
 ✅Milestone 2
 Verificato il corretto funzionamento del nostro codice, spostiamo la logica in un file functions.php che includeremo poi nella pagina principale
 
-Milestone 3 (BONUS)
+✅Milestone 3 (BONUS)
 Invece di visualizzare la password nella index, effettuare un redirect ad una pagina dedicata che tramite $_SESSION recupererà la password da mostrare all’utente.
 leggete le slide sulla session e la documentazione
 
@@ -23,24 +23,11 @@ Gestire ulteriori parametri per la password: quali caratteri usare fra numeri, l
 /* $number = $_GET['number'];
 $letters = $_GET['letters'];
 $symbol = $_GET['symbol']; */
+session_start();
+if (!empty($_SESSION['password'])) {
+    var_dump($_SESSION);
 
-if (isset($_GET['password_length'])) {
-    $password_length = $_GET['password_length'];
-
-    session_start();
-
-    if ($password_length !== '') {
-
-        include __DIR__ . '/partials/functions.php';
-
-        $password = generate_password($password_length);
-
-        $_SESSION["password"] = $password;
-
-        var_dump($_SESSION["password"]);
-    };
-} else {
-    var_dump('no password_length');
+    $password = $_SESSION['password'];
 }
 
 ?>
@@ -63,7 +50,7 @@ if (isset($_GET['password_length'])) {
 
         <!-- ./partials/password.php -->
         <!-- SE FACCIO IL REDIRECT VERSO PASSWORD.PHP RIESCO A VISUALIZZARE LA PASSWORD CORRETTA SOLO LA PRIMA VOLTA,SUCCESSIVAMENTE AD OGNI SUBMIT VISUALIZZO SEMPRE LA STESSA -->
-        <form method="get" action="" class="d-flex align-items-center justify-content-center gap-3">
+        <form method="GET" action="./password.php" class="d-flex align-items-center justify-content-center gap-3">
             <label for="password_length" class="form-label">How long to be the password? Set number between 0 and 30</label>
             <input type="number" class="form-control" name="password_length" id="password_length" aria-describedby="helpId" placeholder="0" style="width: 70px;">
 
